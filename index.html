@@ -13,6 +13,11 @@
             padding: 0;
         }
 
+        #content {
+            width: 100%;
+            height: 100%;
+        }
+
         #map {
             height: 100%;
         }
@@ -24,7 +29,7 @@
 
         #start input,
         #end input {
-            width: 200px!important;
+            width: 400px!important;
         }
 
         #start,
@@ -35,7 +40,7 @@
             margin-left: 12px;
             padding: 0 11px 0 13px;
             text-overflow: ellipsis;
-            width: 300px;
+            width: 200px;
         }
 
         #start:focus,
@@ -55,12 +60,12 @@
             font-family: 'Roboto', 'sans-serif';
             line-height: 30px;
             padding-left: 10px;
+            margin-top: .5em;
         }
 
         #right-panel {
             font-family: 'Roboto', 'sans-serif';
             line-height: 30px;
-            padding-left: 10px;
         }
 
         #right-panel select,
@@ -77,13 +82,20 @@
         }
 
         #right-panel {
-            height: 60%;
-            width: 60%;
-            overflow: auto;
+            height: 100%;
+            width: 45%;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            vertical-align: top;
         }
 
         #map {
-            margin-right: 400px;
+            width: 54%;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            vertical-align: top;
         }
 
         #floating-panel {
@@ -118,7 +130,8 @@
                     lat: -34.397,
                     lng: 150.644
                 },
-                zoom: 12
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             directionsDisplay.setMap(map);
             directionsDisplay.setPanel(document.getElementById('right-panel'));
@@ -260,12 +273,19 @@
     </div>
     <hr>
     <div ng-view></div>
-    <div id='map'></div>
+    <div id="content">
+        <div id='map'>
+        </div>
+        <div id="right-panel">
+            <h2>Directions</h2>
+            <hr>
+        </div>
+    </div>
     <div id="floating-panel">
         <input type="text" id='start' placeholder="Point A">
         <input type="text" id='end' placeholder="Point B">
     </div>
-    <div id="right-panel"></div>
+
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
