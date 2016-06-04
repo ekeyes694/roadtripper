@@ -23,12 +23,11 @@
         }
 
         #start,
-        #end {
+        {
             position: relative!important;
         }
 
-        #start input,
-        #end input {
+        #start input {
             width: 400px!important;
         }
 
@@ -41,23 +40,11 @@
             padding: 0 11px 0 13px;
             text-overflow: ellipsis;
             width: 200px;
+            margin-top: 1em;
         }
 
-        #start:focus,
-        #end:focus {
+        #start:focus {
             border-color: #4d90fe;
-        }
-
-        #floating-panel {
-            z-index: 5;
-            background-color: #fff;
-            padding: 5px;
-            border: 1px solid #999;
-            text-align: center;
-            font-family: 'Roboto', 'sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-            margin-top: .5em;
         }
 
         #right-panel {
@@ -117,6 +104,9 @@
         }
     </style>
     <script>
+        var infoWindow;
+        var map;
+        var pos;
         //geolocation
         function initMap() {
             var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -129,35 +119,7 @@
                 zoom: 12,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
-            directionsDisplay.setMap(map);
-            directionsDisplay.setPanel(document.getElementById('right-panel'));
-            var control = document.getElementById('floating-panel');
-            control.style.display = 'block';
-            map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
-            var onChangeHandler = function () {
-                calculateAndDisplayRoute(directionsService, directionsDisplay);
-            };
-            document.getElementById('start').addEventListener('change', onChangeHandler);
-            document.getElementById('end').addEventListener('change', onChangeHandler);
-            var infoWindow = new google.maps.InfoWindow({
-                map: map
-            });
-            //directions
-            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-                var start = document.getElementById('start').value;
-                var end = document.getElementById('end').value;
-                directionsService.route({
-                    origin: start,
-                    destination: end,
-                    travelMode: google.maps.TravelMode.DRIVING
-                }, function (response, status) {
-                    if (status === google.maps.DirectionsStatus.OK) {
-                        directionsDisplay.setDirections(response);
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
-            }
+
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -175,10 +137,52 @@
                 // Browser doesn't support Geolocation
                 handleLocationError(false, infoWindow, map.getCenter());
             }
+            //directions
+            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                var start = document.getElementById('start').value;
+                var end = document.getElementById('end').value;
+                directionsService.route({
+                    origin: start,
+                    destination: end,
+                    travelMode: google.maps.TravelMode.DRIVING
+                }, function (response, status) {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
+
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('right-panel'));
+
+            var control = document.getElementById('start');
+            control.style.display = 'block';
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+            var onChangeHandler = function () {
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+            };
+            document.getElementById('start').addEventListener('change', onChangeHandler);
+
+            var controlTwo = document.getElementById('end');
+            controlTwo.style.display = 'block';
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(controlTwo);
+            var onChangeHandler = function () {
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+            };
+            document.getElementById('end').addEventListener('change', onChangeHandler);
+
+            var infoWindow = new google.maps.InfoWindow({
+                map: map
+            });
+
 
             var input = document.getElementById('start');
+            //var inputTwo = document.getElementById('end');
 
             var searchBox = new google.maps.places.SearchBox(input);
+            //var searchBoxTwo = new google.maps.places.SearchBox(inputTwo);
 
             map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -240,6 +244,7 @@
                 });
                 map.fitBounds(bounds);
             });
+
         }
 
 
@@ -253,15 +258,6 @@
                 infowindow.setContent(place.name);
                 infowindow.open(map, this);
             });
-        }
-
-        function searchLocations(serviceType) {
-            var service = new google.maps.places.PlacesService(map);
-            service.nearbySearch({
-                location: pos,
-                radius: 100,
-                types: [serviceType]
-            }, callback);
         }
     </script>
 </head>
@@ -285,10 +281,11 @@
             <hr>
         </div>
     </div>
-    <div id="floating-panel">
-        <input type="text" id='start' placeholder="Point A">
-        <input type="text" id='end' placeholder="Point B">
-    </div>
+
+    <input type="text" id='start' placeholder="Point A">
+    <input type="text" id='end' placeholder="Point B">
+
+
 
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
