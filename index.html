@@ -11,14 +11,15 @@
 <body ng-app="myApp" ng-controller="helpController">
     <header>
         <div id="top">
-            <h1>Road Trip Planner</h1>
+            <h1 class="title">Road Trip Planner</h1>
             <button name="myButton" ng-click="help(); show=!show">?</button>
             <div id="helpmenu" ng-show="show">
                 <h1>Help</h1>
                 <hr>
                 <ul>
-                    <li>To start planning pick a starting place from the list</li>
-                    <li>Pick waypoints to add fun things to do on the way</li>
+                    <li>To start planning pick a starting place from the list.</li>
+                    <li>Pick waypoints to add fun things to do on the way.</li>
+                    <li>You can also grab the blue highlighted root and drag it into another route if you prefer.</li>
                     <li>Finally pick a destination and click submit to get your directions and see your route!</li>
                 </ul>
                 <button name="buttonTwo" ng-click="close();">Close</button>
@@ -27,7 +28,6 @@
         </div>
     </header>
 
-    <hr>
     <div id="map"></div>
     <div id="right-panel">
         <div id="search">
@@ -73,16 +73,20 @@
 
 
         </div>
+        <h3>Directions</h3>
+        <hr>
         <div id="directions-panel">
-            <h3>Directions</h3>
-            <hr>
+
         </div>
 
     </div>
+
     <script>
         function initMap() {
             var directionsService = new google.maps.DirectionsService;
-            var directionsDisplay = new google.maps.DirectionsRenderer;
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                draggable: 'true'
+            });
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 6,
                 center: {
