@@ -1,16 +1,12 @@
-var app = angular.module('myApp', ['ngRoute']);
-app.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider
-        .when('/map', {
-            templateUrl: 'partials/map.html',
-            controller: 'mapController'
-        })
-        .when('/saved-trips', {
-            templateUrl: 'partials/saved-trips.html',
-            controller: 'tripsController'
+var app = angular.module('myApp', [])
 
-        })
-        .otherwise({
-            redirectTo: '/map'
+app.controller('helpController', function ($scope) {
+    $scope.show = false;
+    $scope.help = function () {
+        if ($scope.myButton) {
+            $scope.show = true;
+        } else($scope.close = function () {
+            $scope.show = false;
         });
-}]);
+    }
+});

@@ -1,47 +1,6 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#content {
-    width: 100%;
-    height: 100%;
-}
-
-#map {
-    height: 100%;
-}
-
-#start,
-{
-    position: relative!important;
-}
-
-#start input {
-    width: 400px!important;
-}
-
-#start,
-#end {
-    background-color: #fff;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 200px;
-    margin-top: 1em;
-}
-
-#start:focus {
-    border-color: #4d90fe;
-}
-
 #right-panel {
-    font-family: 'Roboto', 'sans-serif';
     line-height: 30px;
+    padding-left: 10px;
 }
 
 #right-panel select,
@@ -57,40 +16,78 @@ body {
     font-size: 12px;
 }
 
-#right-panel {
+#search {
+    margin-right: 1em;
+}
+
+
+/**#top {
+    background-color: darkorange;
+    position: fixed;
+    width: 100%;
+    height: 4.375rem;
+}**/
+
+#helpmenu {
+    border: 1px solid white;
+    background-color: dimgray;
+    color: white;
+    width: 60%;
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    z-index: 9999;
+    border-radius: .5em;
+}
+
+
+/**#helpmenu h1 {
+    float: left;
+    margin-left: .5em;
+    font-size: 70px;
+    color: white;
+}**/
+
+button {
+    background-color: darkorange;
+    border: .5px solid white;
+    color: white;
+    padding: 1em;
+    border-radius: .3em;
+    /**float: right;**/
+    color: white;
+    font-size: 1.04rem;
+    /** margin-top: .2em;
+    margin-bottom: 8em;
+    margin-right: .5em;**/
+}
+
+html,
+body {
     height: 100%;
-    width: 45%;
-    display: inline-block;
+    width: 100%;
     margin: 0;
     padding: 0;
-    vertical-align: top;
+    font-family: 'Roboto', 'sans-serif';
 }
 
 #map {
-    width: 54%;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    vertical-align: top;
+    height: 100%;
+    float: left;
+    width: 70%;
+    height: 100%;
 }
 
-#floating-panel {
-    background: #fff;
-    padding: 5px;
-    font-size: 14px;
-    font-family: Arial;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
-    display: none;
+#right-panel {
+    width: 26%;
+    float: right;
+    text-align: left;
+    margin-right: 1em;
 }
 
-@media print {
-    #map {
-        height: 500px;
-        margin: 0;
-    }
-    #right-panel {
-        float: none;
-        width: auto;
-    }
+#directions-panel {
+    margin-right: .5em;
+    height: 347px;
+    overflow: scroll;
 }
