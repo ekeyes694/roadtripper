@@ -71,10 +71,9 @@ body {
 }
 
 #map {
-    height: 100%;
+    height: 131%;
     float: left;
     width: 70%;
-    height: 124%;
 }
 
 #right-panel {
@@ -83,7 +82,8 @@ body {
     text-align: left;
     margin-right: .em;
     background-color: dimgray;
-    padding: 1.6em;
+    padding: 1.4em;
+    height: 124%;
 }
 
 #directions-panel {
