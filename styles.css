@@ -1,3 +1,20 @@
+#weather {
+    margin-top: 40px;
+}
+
+#temp {
+    font-weight: bold;
+}
+
+#temp:hover {
+    background: yellow;
+    cursor: pointer;
+}
+
+#wind {
+    font-style: italic;
+}
+
 #right-panel {
     line-height: 30px;
 }
